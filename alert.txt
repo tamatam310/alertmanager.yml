@@ -1,0 +1,22 @@
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 10s
+  receiver: 'email'
+receivers:
+- name: 'email'
+  email_configs:
+  - to: 'tamatam310@gmail.com'
+    from: 'rajeshtamatam310@gmail.com'
+    smarthost: smtp.gmail.com:587
+    auth_username: 'rajeshtamatam310@gmail.com'
+    auth_identity: 'rajeshtamatam310@gmail.com'
+    auth_password: 'ncsxnwiajddpcieu'
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
+
